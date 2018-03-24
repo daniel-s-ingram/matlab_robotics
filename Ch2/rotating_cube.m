@@ -15,20 +15,27 @@ end
 r = 0;
 p = 0;
 y = 0;
+t = 0;
+
+maxDim = max([l, w, h]);
 
 while true
+    length = l*sin(t);
+    width = w*sin(t+pi/4);
+    height = h*cos(t);
     r = r+0.01;
     p = p+0.01;
     y = y+0.01;
+    t = t+0.1;
     
-    plot_cube(l, w, h, r, p, y);
+    plot_cube(length, width, height, r, p, y, maxDim);
     
     drawnow;
 end
 
 end
 
-function plot_cube(l, w, h, r, p, y)
+function plot_cube(l, w, h, r, p, y, maxDim)
 R = eul2r(r, p, y);
 p = [[w/2; l/2; h/2], ...
       [w/2; -l/2; h/2], ...
@@ -57,8 +64,8 @@ z = [[p(3,1); p(3,2)], [p(3,1); p(3,3)], [p(3,1); p(3,5)], ...
         [p(3,4); p(3,2)], [p(3,4); p(3,3)], [p(3,4); p(3,8)]];
    
 
-plot3(x, y, z);
-limit = max([l, w, h]);
+plot3(x, y, z, 'r');
+limit = maxDim;
 xlim([-limit, limit]);
 ylim([-limit, limit]);
 zlim([-limit, limit]);

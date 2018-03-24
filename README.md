@@ -1,1 +1,1 @@
-# Exercises from Robotics: Vision and Control by Peter Corke
+# Exercises from Robotics, Vision and Control by Peter Corke

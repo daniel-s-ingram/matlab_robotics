@@ -1,3 +1,12 @@
+%Robotics, Vision and Control - Peter Corke
+%Problem 2.2
+% Animate a rotating cube.
+% a) Write a function to plot the edges of a cube centered at the origin.
+% b) Modify the function to accept an argument which is a homogeneous transformation which is
+%    applied to the cube vertices before plotting.
+% c) Animate rotation about the x-axis.
+% d) Animate rotation about all axes.
+
 function rotating_cube(l, w, h)
 if nargin ~= 3
     l = 5; w = 5; h = 5;
@@ -6,14 +15,6 @@ end
 r = 0;
 p = 0;
 y = 0;
-
-% t = timer('ExecutionMode', 'fixedRate', ...
-%     'TasksToExecute', Inf, ...
-%     'Period', 0.01, ...
-%     'TimerFcn', {@increment_angles, l, w, h}, ...
-%     'UserData', struct('roll', r, 'pitch', p, 'yaw', y));
-% 
-% start(t);
 
 while true
     r = r+0.01;

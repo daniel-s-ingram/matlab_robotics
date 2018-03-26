@@ -7,13 +7,12 @@ function [exponential, terms] = matrix_exponential(A)
 
 [m, n] = size(A);
 
-precision = 2^(-digits);
 E = expm(A); %Matrix exponential using the built-in MATLAB function
 
-exponential = eye(m, n);
+exponential = zeros(m, n);
 terms = 0;
 
-while abs(E - (exponential+A^terms/factorial(terms))) > precision
+while any(abs(E - exponential) > eps)
     exponential = exponential + A^terms/factorial(terms);
     terms = terms+1;
 end

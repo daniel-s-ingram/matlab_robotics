@@ -21,11 +21,11 @@ while distance > L/2
     y_diff = y_goal-y;
     distance = sqrt(x_diff^2 + y_diff^2);
     
-    theta = atan2(y_diff, x_diff);
+    theta = theta + angdiff(atan2(x_diff, y_diff), theta)*dt;
     
     v = Kp * distance;
-    x = x + (v*cos(theta))*dt;
-    y = y + (v*sin(theta))*dt;
+    x = x + (v*sin(theta))*dt;
+    y = y + (v*cos(theta))*dt;
     t = t+dt;
     
     vehicle.UpdatePose(x, y, -theta);
@@ -39,9 +39,9 @@ function PlotPose(vehicle, dt, x_goal, y_goal, L, t, x, y, theta)
          [vehicle.back_right(1), vehicle.back_left(1)], [vehicle.back_right(2), vehicle.back_left(2)], 'b-', ...
          [vehicle.back_left(1), vehicle.front(1)], [vehicle.back_left(2), vehicle.front(2)], 'r-', ...
          x_goal, y_goal, 'bo');
-      
-    xlim([-abs(x_goal)-L, abs(x_goal)+L]);
-    ylim([-abs(y_goal)-L, abs(y_goal)+L]);
+     
+    xlim([-2*abs(x_goal), 2*abs(x_goal)]);
+    ylim([-2*abs(y_goal), 2*abs(y_goal)]);
     xlabel('x-position');
     ylabel('y-position');
     hold off;

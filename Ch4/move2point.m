@@ -1,7 +1,7 @@
 %Robotics, Vision and Control - Peter Corke
 %Problem 4.6
 % Moving to a point: plot x, y, and theta against time.
-function move2point(x_goal, y_goal, Kp)
+function move2point(x_goal, y_goal, Kv, Kh)
 vehicle = SimpleVehicle(0, 0, 0, 1);
 
 L = vehicle.L;
@@ -21,9 +21,9 @@ while distance > L/2
     y_diff = y_goal-y;
     distance = sqrt(x_diff^2 + y_diff^2);
     
-    theta = theta + angdiff(atan2(x_diff, y_diff), theta)*dt;
+    theta = theta + Kh*angdiff(atan2(x_diff, y_diff), theta)*dt;
     
-    v = Kp * distance;
+    v = Kv * distance;
     x = x + (v*sin(theta))*dt;
     y = y + (v*cos(theta))*dt;
     t = t+dt;

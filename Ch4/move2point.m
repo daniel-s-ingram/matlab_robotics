@@ -44,7 +44,7 @@ function PlotPose(vehicle, dt, x_goal, y_goal, L, t, x, y, theta)
     ylim([-2*abs(y_goal), 2*abs(y_goal)]);
     xlabel('x-position');
     ylabel('y-position');
-    hold off;
+    hold on;
     
     subplot(4, 3, 10);
     plot(t, x, 'b.');

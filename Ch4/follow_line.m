@@ -1,5 +1,5 @@
 function follow_line(a, b, c, Kd, Kh)
-if nargin == 0
+if nargin ~= 5
     a = 2;
     b = 4;
     c = 100;
@@ -11,7 +11,7 @@ vehicle = SimpleVehicle(0, 0, pi/4, 1);
 
 dt = 0.01;
 
-v = 10;
+v = 20;
 x = vehicle.x;
 y = vehicle.y;
 theta = vehicle.theta;

@@ -2,6 +2,19 @@
 %Problem 4.6
 % Moving to a point: plot x, y, and theta against time.
 function move2point(x_goal, y_goal, Kv, Kh)
+if nargin ~= 4
+    Kv = 1;
+    Kh = 2;
+    x_goal = 50*rand-25;
+    y_goal = x_goal;
+end
+
+global running
+running = true;
+
+fig = gcf;
+set(fig, 'KeyPressFcn', @KeyPressed);
+
 vehicle = SimpleVehicle(0, 0, 0, 1);
 
 L = vehicle.L;
@@ -16,7 +29,7 @@ x_diff = x_goal-x;
 y_diff = y_goal-y;
 distance = sqrt(x_diff^2 + y_diff^2);
 
-while distance > L/2
+while distance > L/2 && running
     x_diff = x_goal-x;
     y_diff = y_goal-y;
     distance = sqrt(x_diff^2 + y_diff^2);
@@ -31,6 +44,9 @@ while distance > L/2
     vehicle.UpdatePose(x, y, -theta);
     PlotPose(vehicle, dt, x_goal, y_goal, L, t, x, y, theta);
 end
+
+close;
+
 end
 
 function PlotPose(vehicle, dt, x_goal, y_goal, L, t, x, y, theta)
@@ -65,5 +81,12 @@ function PlotPose(vehicle, dt, x_goal, y_goal, L, t, x, y, theta)
     hold on;
     
     pause(dt);
+end
+
+function KeyPressed(~, event)
+global running
+if strcmp(event.Key, 'escape')
+    running = false;
+end
 end
      

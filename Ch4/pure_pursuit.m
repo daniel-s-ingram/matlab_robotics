@@ -1,10 +1,12 @@
-function pure_pursuit()
-Kv = 3;
-Ki = 0.00001;
-Kh = 6;
+function pure_pursuit(A, range, Kv, Ki, Kh)
+if nargin ~= 5
+    Kv = 3;
+    Ki = 0.00001;
+    Kh = 6;
+    A = 5;
+    range = 4*pi;
+end
 
-A = 5;
-range = 4*pi;
 dt = 0.01;
 
 global running
@@ -55,9 +57,9 @@ close;
 end
 
 function PlotPose(vehicle)
-    plot([vehicle.front(1), vehicle.back_right(1)], [vehicle.front(2), vehicle.back_right(2)], 'r-', ...
-         [vehicle.back_right(1), vehicle.back_left(1)], [vehicle.back_right(2), vehicle.back_left(2)], 'b-', ...
-         [vehicle.back_left(1), vehicle.front(1)], [vehicle.back_left(2), vehicle.front(2)], 'r-');
+plot([vehicle.front(1), vehicle.back_right(1)], [vehicle.front(2), vehicle.back_right(2)], 'r-', ...
+     [vehicle.back_right(1), vehicle.back_left(1)], [vehicle.back_right(2), vehicle.back_left(2)], 'b-', ...
+     [vehicle.back_left(1), vehicle.front(1)], [vehicle.back_left(2), vehicle.front(2)], 'r-');
 end
 
 function KeyPressed(~, event)
